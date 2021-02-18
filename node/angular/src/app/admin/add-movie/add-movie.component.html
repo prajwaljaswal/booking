@@ -1,0 +1,130 @@
+<mat-card class="row">
+  <mat-card-title class="col-12"><p>Add Movie</p></mat-card-title>
+  <mat-card-content class="col-9 mt-4 mb-2 px-3">
+    <form (ngSubmit)="onSubmit()" [formGroup]="AddMovieForm">
+      <div class="row">
+        <mat-form-field class="col-12 mb-2" appearance="outline">
+          <mat-label>Title</mat-label>
+          <input required formControlName="movieName" matInput />
+          <mat-hint>
+            Title can contains (a-z,0-9,:,A-Z,-, ,') only and 1 to 60 characters
+            long
+          </mat-hint>
+          <mat-error
+            *ngIf="
+              !AddMovieForm.get('movieName').hasError('required') &&
+              AddMovieForm.get('movieName').errors
+            "
+          >
+            <p>Enter a valid title</p>
+          </mat-error>
+          <mat-error *ngIf="AddMovieForm.get('movieName').hasError('required')">
+            <p>Title is required</p>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 mb-2" appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea
+            required
+            formControlName="movieDesc"
+            rows="10"
+            matInput
+          ></textarea>
+          <mat-error
+            *ngIf="
+              !AddMovieForm.get('movieDesc').hasError('required') &&
+              AddMovieForm.get('movieDesc').errors
+            "
+          >
+            <p>
+              description can contains [ a-z0-9A-Z,./: '-?!@$%*&() ] only and 10
+              to 500 characters long
+            </p>
+          </mat-error>
+          <mat-error *ngIf="AddMovieForm.get('movieDesc').hasError('required')">
+            <p>description is required</p>
+          </mat-error>
+        </mat-form-field>
+
+        <div class="col-12 mb-2">
+          <p>Rating</p>
+          <mat-slider
+            [max]="5"
+            [min]="1"
+            [step]="0.5"
+            [thumbLabel]="true"
+            [tickInterval]="1"
+            formControlName="movieRating"
+            color="primary"
+            required
+          >
+          </mat-slider>
+          <mat-error
+            *ngIf="AddMovieForm.get('movieRating').hasError('required')"
+          >
+            <p>Rating is required</p>
+          </mat-error>
+        </div>
+
+        <mat-form-field class="col-12 mb-2" appearance="outline">
+          <mat-label>Movie Price</mat-label>
+          <input
+            type="number"
+            required
+            required
+            formControlName="moviePrice"
+            matInput
+          />
+          <mat-error
+            *ngIf="
+              !AddMovieForm.get('moviePrice').hasError('required') &&
+              AddMovieForm.get('moviePrice').errors
+            "
+          >
+            <p>Minimum 120 Rs. and Maximum 1000 Rs.</p>
+          </mat-error>
+          <mat-error
+            *ngIf="AddMovieForm.get('moviePrice').hasError('required')"
+          >
+            <p>Field is required</p>
+          </mat-error>
+        </mat-form-field>
+
+        <div class="col-12 mb-2" appearance="outline">
+          <p>Upload Image*</p>
+          <input
+            accept="image/jpeg,image/png,image/jpg"
+            type="file"
+            (change)="fileUpload($event.target.files)"
+          />
+          <div>
+            <img class="img-thumbnail" [src]="imageSrc" height="100px" />
+          </div>
+          <mat-error>
+            <p>{{ fileError }}</p>
+          </mat-error>
+          <mat-error *ngIf="AddMovieForm.get('movieImg').hasError('required')">
+            <p>Field is required</p>
+          </mat-error>
+        </div>
+
+        <p class="col-12 text-danger text-center" *ngIf="errors">
+          {{ errors }}
+        </p>
+
+        <div class="col-12">
+          <button
+            class="col-12"
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="AddMovieForm.invalid"
+          >
+            <span>Save</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

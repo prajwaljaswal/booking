@@ -1,0 +1,71 @@
+<div class="list-group list-group-flush">
+  <!-- common -->
+
+  <!-- public -->
+  <ng-container *ngIf="role == 1">
+    <a
+      matRipple
+      [routerLink]="['./']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="list-group-item list-group-item-action"
+    >
+      View Profile
+    </a>
+    <hr />
+    <a
+      matRipple
+      [routerLink]="['./edit']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="list-group-item list-group-item-action"
+    >
+      Edit Profile
+    </a>
+  </ng-container>
+
+  <!-- admin -->
+  <ng-container *ngIf="role == 2">
+    <a
+      matRipple
+      [routerLink]="['/admin/users']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="list-group-item list-group-item-action"
+      >View All Users
+    </a>
+    <a
+      matRipple
+      [routerLink]="['/admin/add']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="list-group-item list-group-item-action"
+      >Add new admin</a
+    >
+    <a
+      matRipple
+      [routerLink]="['/admin/bookings']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="list-group-item list-group-item-action"
+    >
+      Booking History
+    </a>
+    <a
+      matRipple
+      [routerLink]="['/admin/movie/add']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="list-group-item list-group-item-action"
+      >Add Movies</a
+    >
+    <a
+      matRipple
+      [routerLink]="['/admin/movie']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="list-group-item list-group-item-action"
+      >View All Movies</a
+    >
+  </ng-container>
+</div>

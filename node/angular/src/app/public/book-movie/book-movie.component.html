@@ -1,0 +1,78 @@
+<app-print-ticket
+  [movieData]="{
+    seat: selectedSeats,
+    title: movie.movieName,
+    tagline: movie.movieDesc,
+    price: movie.moviePrice
+  }"
+  *ngIf="isTicketBooked; else bookTicket"
+></app-print-ticket>
+
+<ng-template #bookTicket>
+  <div class="row" *ngIf="showView">
+    <div class="col-12 mb-5">
+      <div class="card">
+        <div
+          class="background"
+          [style.background-image]="
+            'url(/assets/uploads/' + movie.movieImg + ')'
+          "
+        ></div>
+        <div class="card-header">
+          <h1>{{ movie.movieName | titlecase }}</h1>
+          <h3>{{ movie.movieDesc }}</h3>
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <footer class="blockquote-footer">
+              {{ movie.moviePrice | currency: "INR" }} on
+              <cite title="Source Title">{{ movie.movieRating }}</cite>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 mb-5">
+      <div class="card text-center">
+        <div class="card-header">Select your seat</div>
+        <div class="card-body">
+          <h5 class="card-title">Screen this side</h5>
+          <div class="card-text">
+            <ng-container *ngFor="let col of seatColumn">
+              <ng-container *ngFor="let row of seatRow">
+                <button
+                  mat-ripple
+                  class="seat-button"
+                  (click)="selectSeat(col, row)"
+                  [ngClass]="{ selected: checkSelectedSeat(col + row) }"
+                  [disabled]="checkBookedSeat(col + row)"
+                >
+                  <p>
+                    <mat-icon>event_seat</mat-icon><br />
+                    {{ col }}{{ row }}
+                  </p>
+                </button>
+              </ng-container>
+              <hr />
+              <br />
+            </ng-container>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button
+            role="button"
+            mat-raised-button
+            [disabled]="selectedSeats.length == 0"
+            color="primary"
+            class="w-100"
+            (click)="bookSeat()"
+          >
+            <mat-icon>add_box</mat-icon>
+            <h3 class="mat-h6 m-0 p-0">Book Now</h3>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

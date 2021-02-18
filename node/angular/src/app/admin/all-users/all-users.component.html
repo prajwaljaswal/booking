@@ -1,0 +1,22 @@
+<table
+  class="table mt-3 w-100 table-striped table-bordered table-hover table-responsive"
+>
+  <thead>
+    <th scope="col">#</th>
+    <th scope="col">Username</th>
+    <th scope="col">First Name</th>
+    <th scope="col">Last Name</th>
+    <th scope="col">Phone</th>
+    <th scope="col">Email</th>
+  </thead>
+  <tbody>
+    <tr a-for *ngFor="let user of allUserData; let inp = index">
+      <th scope="row">{{ inp + 1 }}</th>
+      <td>{{ user.username | titlecase }}</td>
+      <td>{{ user.firstname | titlecase }}</td>
+      <td>{{ user.lastname | titlecase }}</td>
+      <td>{{ user.phone }}</td>
+      <td>{{ user.email }}</td>
+    </tr>
+  </tbody>
+</table>

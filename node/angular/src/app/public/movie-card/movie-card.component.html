@@ -1,0 +1,24 @@
+<mat-card
+  [style.background-image]="'url(/assets/uploads/' + movieData.movieImg + ')'"
+  class="mb-4 movie-card"
+>
+  <div class="text-overlay p-2">
+    <div class="d-flex flex-column justify-content-end flex-nowrap h-100 w-100">
+      <div class="d-flex justify-content-between align-items-end">
+        <h2 class="mat-h2 m-0">{{ movieData.movieName | titlecase }}</h2>
+        <h3 class="mat-h3 m-0">
+          {{ movieData.moviePrice | currency: "INR" }}
+        </h3>
+      </div>
+      <h6 class="mat-h4 m-0">{{ movieData.movieDesc | slice: 0:70 }} ...</h6>
+      <button
+        mat-flat-button
+        class="w-50"
+        color="primary"
+        [routerLink]="[movieData.movieId, 'book']"
+      >
+        View Detail
+      </button>
+    </div>
+  </div>
+</mat-card>
